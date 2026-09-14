@@ -1,7 +1,19 @@
 import React from "react"
 
-function ToyCard({ toy }) {
-    // note that image src is changed to null to avoid browser reloading page infinitely
+function ToyCard({ toy, deleteToy }) {
+    // function to donate (delete) toy
+    function handleDelete() {
+        fetch(`http://localhost:3001/toys/${toy.id}`, {
+            method: "DELETE"
+        })
+        .then(r => {
+            if (!r.ok) throw new Error("Error deleting toy:", r.status)
+            else deleteToy(toy)
+        })
+        .catch(err => console.error(err))
+    }
+
+    // note that image src is changed to null on render, to avoid browser reloading page infinitely
     return (
         <div className="card" data-testid="toy-card">
             <h2>{toy.name}</h2>
@@ -12,7 +24,7 @@ function ToyCard({ toy }) {
             />
             <p>{toy.likes} Likes </p>
             <button className="like-btn">Like {"<3"}</button>
-            <button className="del-btn">Donate to GoodWill</button>
+            <button className="del-btn" onClick={handleDelete}>Donate to GoodWill</button>
         </div>
     )
 }
