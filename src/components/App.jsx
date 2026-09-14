@@ -30,7 +30,7 @@ function App() {
 
     // add toy callback from form
     function addToy(toy) {
-        setToys(prevToys => [...prevToys, toy])
+        setToys((prevToys) => [...prevToys, toy])
     }
 
     return (

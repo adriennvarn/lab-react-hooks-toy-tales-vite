@@ -1,11 +1,12 @@
 import React from "react"
 
 function ToyCard({ toy }) {
+    // note that image src is changed to null to avoid browser reloading page infinitely
     return (
         <div className="card" data-testid="toy-card">
             <h2>{toy.name}</h2>
             <img
-                src={toy.image}
+                src={toy.image || null}
                 alt={toy.name}
                 className="toy-avatar"
             />

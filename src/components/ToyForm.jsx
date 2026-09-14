@@ -1,16 +1,19 @@
 import React, { useState } from "react"
+import {v4 as uuid} from "uuid"
 
 function ToyForm({ addToy }) {
     // blank toy to reset form
-    // image is set to null rather than blank string due to warning about browser reloading infinitely
+    // id reset to avoid dupes
     const blankToy = {
+        id: uuid(),
         name: "",
-        image: null,
+        image: "",
         likes: 0
     }
     // state for controlled form
     const [newToy, setNewToy] = useState(blankToy)
 
+    // update newToy on change
     const handleChange = (e) => {
         setNewToy(prevData => ({
             ...prevData,
@@ -18,6 +21,7 @@ function ToyForm({ addToy }) {
         }))
     }
 
+    // on submit, POST newToy, call addToy to update UI, and reset newToy to blank with new id
     function handleSubmit(e) {
         e.preventDefault()
         fetch("http://localhost:3001/toys", {
@@ -25,15 +29,15 @@ function ToyForm({ addToy }) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newToy)
         })
-        .then(r => {
-            if (r.ok) return r.json()
+            .then(r => {
+                if (r.ok) return r.json()
                 else throw new Error("Error posting new toy:", r.status)
-        })
-        .then(data => {
-            addToy(data)
-            setNewToy(blankToy)
-        })
-        .catch(err => console.error(err))
+            })
+            .then(data => {
+                addToy(data)
+                setNewToy(blankToy)
+            })
+            .catch(err => console.error(err))
     }
 
     return (
