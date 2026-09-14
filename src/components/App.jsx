@@ -38,6 +38,11 @@ function App() {
         setToys(toys.filter(toy => toy.id !== toyToDelete))
     }
 
+    // update likes callback
+    function likeToy(updatedToy) {
+        setToys(toys.map(toy => toy.id === updatedToy.id ? updatedToy : toy))
+    }
+
     return (
         <>
             <Header />
@@ -45,7 +50,7 @@ function App() {
             <div className="buttonContainer">
                 <button onClick={handleClick}>Add a Toy</button>
             </div>
-            <ToyContainer toys={toys} deleteToy={deleteToy} />
+            <ToyContainer toys={toys} deleteToy={deleteToy} likeToy={likeToy} />
         </>
     )
 }
