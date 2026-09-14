@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
-import Header from "./Header";
-import ToyForm from "./ToyForm";
-import ToyContainer from "./ToyContainer";
+import Header from "./Header"
+import ToyForm from "./ToyForm"
+import ToyContainer from "./ToyContainer"
 
 function App() {
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(false)
 
   function handleClick() {
-    setShowForm((showForm) => !showForm);
+    setShowForm((showForm) => !showForm)
   }
 
   return (
@@ -20,7 +20,7 @@ function App() {
       </div>
       <ToyContainer />
     </>
-  );
+  )
 }
 
-export default App;
+export default App

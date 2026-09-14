@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 function ToyCard() {
   return (
@@ -13,7 +13,7 @@ function ToyCard() {
       <button className="like-btn">Like {"<3"}</button>
       <button className="del-btn">Donate to GoodWill</button>
     </div>
-  );
+  )
 }
 
-export default ToyCard;
+export default ToyCard
