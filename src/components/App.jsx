@@ -19,9 +19,9 @@ function App() {
                 if (r.ok) return r.json()
                 else throw new Error("Error fetching toys:", r.status)
             })
-            .then(setToys)
+            .then(data => setToys(data))
             .catch(err => console.error(err))
-    })
+    }, [])
 
     // show form
     function handleClick() {
@@ -35,12 +35,12 @@ function App() {
 
     // delete toy callback
     function deleteToy(toyToDelete) {
-        setToys(toys.filter(toy => toy.id !== toyToDelete))
+        setToys(toys.filter((toy) => toy.id !== toyToDelete.id))
     }
 
     // update likes callback
     function likeToy(updatedToy) {
-        setToys(toys.map(toy => toy.id === updatedToy.id ? updatedToy : toy))
+        setToys(toys.map((toy) => toy.id === updatedToy.id ? updatedToy : toy))
     }
 
     return (
